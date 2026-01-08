@@ -31,6 +31,17 @@ app.get('/health', (req, res) => {
   })
 })
 
+// Clear all data endpoint (for fresh start)
+app.delete('/api/clear-all', async (req, res) => {
+  try {
+    const storage = (await import('./data/mongodb-storage.js')).default;
+    await storage.clearAll();
+    res.json({ message: 'All data cleared successfully! App is now fresh.' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error clearing data', error: error.message });
+  }
+})
+
 // API Routes - No authentication needed
 app.use('/api/vehicles', vehicleRoutes)
 app.use('/api/scrap', scrapRoutes)

@@ -156,6 +156,22 @@ class MongoDBStorage {
     }
   }
 
+  // Clear all data from all collections
+  async clearAll() {
+    try {
+      await Vehicle.deleteMany({});
+      await VehicleTransaction.deleteMany({});
+      await Scrap.deleteMany({});
+      await Expense.deleteMany({});
+      await Bill.deleteMany({});
+      console.log('🗑️ All data cleared from MongoDB');
+      return true;
+    } catch (err) {
+      console.error('Error clearing data:', err);
+      return false;
+    }
+  }
+
   // No-op methods for compatibility
   loadData() {
     console.log('📂 Using MongoDB Atlas for data storage');
