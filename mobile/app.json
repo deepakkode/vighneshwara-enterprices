@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "Vighneshwara Enterprises",
+    "slug": "vighneshwara-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#25D366"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#25D366"
+      },
+      "package": "com.vighneshwaraenterprises.mobile"
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "cli": {
+      "appVersionSource": "local"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "426d1e26-ed7f-4611-b3d3-6cec9ce7696e"
+      }
+    }
+  }
+}

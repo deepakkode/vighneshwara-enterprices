@@ -1,0 +1,51 @@
+{
+  "name": "vighneshwara-enterprises-dashboard",
+  "version": "1.0.0",
+  "description": "Modern business management dashboard for Vighneshwara Enterprises",
+  "type": "module",
+  "scripts": {
+    "setup": "node scripts/setup.js",
+    "setup-db": "node scripts/setup-database.js",
+    "firebase:setup": "node scripts/firebase-setup.js",
+    "firebase:init": "firebase init",
+    "firebase:login": "firebase login",
+    "firebase:deploy": "firebase deploy",
+    "firebase:deploy:rules": "firebase deploy --only firestore:rules",
+    "firebase:deploy:hosting": "firebase deploy --only hosting",
+    "firebase:emulators": "firebase emulators:start",
+    "dev": "node scripts/dev.js",
+    "dev:docker": "docker-compose up",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build": "npm run build:backend && npm run build:frontend",
+    "build:backend": "cd backend && npm run build",
+    "build:frontend": "cd frontend && npm run build",
+    "start": "cd backend && npm start",
+    "test": "npm run test:backend && npm run test:frontend",
+    "test:backend": "cd backend && npm test",
+    "test:frontend": "cd frontend && npm test",
+    "lint": "npm run lint:backend && npm run lint:frontend",
+    "lint:backend": "cd backend && npm run lint",
+    "lint:frontend": "cd frontend && npm run lint",
+    "clean": "rm -rf node_modules backend/node_modules frontend/node_modules",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f"
+  },
+  "keywords": [
+    "business-management",
+    "dashboard",
+    "scrap-trading",
+    "vehicle-tracking",
+    "bill-generation"
+  ],
+  "author": "Vighneshwara Enterprises",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "workspaces": [
+    "frontend",
+    "backend"
+  ]
+}
