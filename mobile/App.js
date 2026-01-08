@@ -109,24 +109,26 @@ export default function App() {
     loadAllData();
   }, []);
 
+  const API_URL = 'https://vighneshwara-enterprices.onrender.com/api';
+
   const loadAllData = async () => {
     try {
       // Load vehicle transactions
-      const vehicleTransactionsResponse = await fetch('http://10.162.58.180:3002/api/vehicles/transactions');
+      const vehicleTransactionsResponse = await fetch(`${API_URL}/vehicles/transactions`);
       if (vehicleTransactionsResponse.ok) {
         const vehicleTransactionsData = await vehicleTransactionsResponse.json();
         setVehicleTransactions(vehicleTransactionsData);
       }
 
       // Load scrap items
-      const scrapResponse = await fetch('http://10.162.58.180:3002/api/scrap');
+      const scrapResponse = await fetch(`${API_URL}/scrap`);
       if (scrapResponse.ok) {
         const scrapData = await scrapResponse.json();
         setScrapItems(scrapData);
       }
 
       // Load expenses
-      const expensesResponse = await fetch('http://10.162.58.180:3002/api/expenses');
+      const expensesResponse = await fetch(`${API_URL}/expenses`);
       if (expensesResponse.ok) {
         const expensesData = await expensesResponse.json();
         setExpenses(expensesData);
@@ -160,7 +162,7 @@ export default function App() {
       
       // Send to backend
       try {
-        const response = await fetch('http://10.162.58.180:3002/api/vehicles/transactions', {
+        const response = await fetch(`${API_URL}/vehicles/transactions`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(transaction)
@@ -195,7 +197,7 @@ export default function App() {
       
       // Send to backend
       try {
-        const response = await fetch('http://10.162.58.180:3002/api/scrap', {
+        const response = await fetch(`${API_URL}/scrap`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(scrapItem)
@@ -229,7 +231,7 @@ export default function App() {
       
       // Send to backend
       try {
-        const response = await fetch('http://10.162.58.180:3002/api/expenses', {
+        const response = await fetch(`${API_URL}/expenses`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(expense)

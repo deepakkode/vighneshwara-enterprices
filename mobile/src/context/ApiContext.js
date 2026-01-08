@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const ApiContext = createContext();
 
-const API_BASE_URL = 'http://10.162.58.180:3001/api';
+const API_BASE_URL = 'https://vighneshwara-enterprices.onrender.com/api';
 
 export const useApi = () => {
   const context = useContext(ApiContext);
