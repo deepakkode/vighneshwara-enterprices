@@ -1,12 +1,12 @@
 import express from 'express'
-import storage from '../data/storage.js'
+import storage from '../data/mongodb-storage.js'
 
 const router = express.Router()
 
 // GET /api/expenses - Get all expenses
 router.get('/', async (req, res) => {
   try {
-    const expenses = storage.findAll('expenses')
+    const expenses = await storage.findAll('expenses')
     res.json(expenses)
   } catch (error) {
     res.status(500).json({ message: 'Error fetching expenses', error: error.message })
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 // GET /api/expenses/:id - Get expense by ID
 router.get('/:id', async (req, res) => {
   try {
-    const expense = storage.findById('expenses', req.params.id)
+    const expense = await storage.findById('expenses', req.params.id)
     if (!expense) {
       return res.status(404).json({ message: 'Expense not found' })
     }
@@ -29,7 +29,7 @@ router.get('/:id', async (req, res) => {
 // POST /api/expenses - Create new expense
 router.post('/', async (req, res) => {
   try {
-    const expense = storage.create('expenses', req.body)
+    const expense = await storage.create('expenses', req.body)
     res.status(201).json(expense)
   } catch (error) {
     res.status(500).json({ message: 'Error creating expense', error: error.message })
@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
 // PUT /api/expenses/:id - Update expense
 router.put('/:id', async (req, res) => {
   try {
-    const expense = storage.update('expenses', req.params.id, req.body)
+    const expense = await storage.update('expenses', req.params.id, req.body)
     if (!expense) {
       return res.status(404).json({ message: 'Expense not found' })
     }
@@ -52,7 +52,7 @@ router.put('/:id', async (req, res) => {
 // DELETE /api/expenses/:id - Delete expense
 router.delete('/:id', async (req, res) => {
   try {
-    const deleted = storage.delete('expenses', req.params.id)
+    const deleted = await storage.delete('expenses', req.params.id)
     if (!deleted) {
       return res.status(404).json({ message: 'Expense not found' })
     }

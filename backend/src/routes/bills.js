@@ -1,12 +1,12 @@
 import express from 'express'
-import storage from '../data/storage.js'
+import storage from '../data/mongodb-storage.js'
 
 const router = express.Router()
 
 // GET /api/bills - Get all bills
 router.get('/', async (req, res) => {
   try {
-    const bills = storage.findAll('bills')
+    const bills = await storage.findAll('bills')
     res.json(bills)
   } catch (error) {
     res.status(500).json({ message: 'Error fetching bills', error: error.message })
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 // GET /api/bills/:id - Get bill by ID
 router.get('/:id', async (req, res) => {
   try {
-    const bill = storage.findById('bills', req.params.id)
+    const bill = await storage.findById('bills', req.params.id)
     if (!bill) {
       return res.status(404).json({ message: 'Bill not found' })
     }
@@ -29,7 +29,7 @@ router.get('/:id', async (req, res) => {
 // POST /api/bills - Create new bill
 router.post('/', async (req, res) => {
   try {
-    const bill = storage.create('bills', req.body)
+    const bill = await storage.create('bills', req.body)
     res.status(201).json(bill)
   } catch (error) {
     res.status(500).json({ message: 'Error creating bill', error: error.message })
@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
 // PUT /api/bills/:id - Update bill
 router.put('/:id', async (req, res) => {
   try {
-    const bill = storage.update('bills', req.params.id, req.body)
+    const bill = await storage.update('bills', req.params.id, req.body)
     if (!bill) {
       return res.status(404).json({ message: 'Bill not found' })
     }
@@ -52,7 +52,7 @@ router.put('/:id', async (req, res) => {
 // DELETE /api/bills/:id - Delete bill
 router.delete('/:id', async (req, res) => {
   try {
-    const deleted = storage.delete('bills', req.params.id)
+    const deleted = await storage.delete('bills', req.params.id)
     if (!deleted) {
       return res.status(404).json({ message: 'Bill not found' })
     }

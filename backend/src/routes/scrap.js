@@ -1,12 +1,12 @@
 import express from 'express'
-import storage from '../data/storage.js'
+import storage from '../data/mongodb-storage.js'
 
 const router = express.Router()
 
 // GET /api/scrap - Get all scrap items
 router.get('/', async (req, res) => {
   try {
-    const scrapItems = storage.findAll('scrap')
+    const scrapItems = await storage.findAll('scrap')
     res.json(scrapItems)
   } catch (error) {
     res.status(500).json({ message: 'Error fetching scrap items', error: error.message })
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 // GET /api/scrap/:id - Get scrap item by ID
 router.get('/:id', async (req, res) => {
   try {
-    const scrapItem = storage.findById('scrap', req.params.id)
+    const scrapItem = await storage.findById('scrap', req.params.id)
     if (!scrapItem) {
       return res.status(404).json({ message: 'Scrap item not found' })
     }
@@ -29,7 +29,7 @@ router.get('/:id', async (req, res) => {
 // POST /api/scrap - Create new scrap item
 router.post('/', async (req, res) => {
   try {
-    const scrapItem = storage.create('scrap', req.body)
+    const scrapItem = await storage.create('scrap', req.body)
     res.status(201).json(scrapItem)
   } catch (error) {
     res.status(500).json({ message: 'Error creating scrap item', error: error.message })
@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
 // PUT /api/scrap/:id - Update scrap item
 router.put('/:id', async (req, res) => {
   try {
-    const scrapItem = storage.update('scrap', req.params.id, req.body)
+    const scrapItem = await storage.update('scrap', req.params.id, req.body)
     if (!scrapItem) {
       return res.status(404).json({ message: 'Scrap item not found' })
     }
@@ -52,7 +52,7 @@ router.put('/:id', async (req, res) => {
 // DELETE /api/scrap/:id - Delete scrap item
 router.delete('/:id', async (req, res) => {
   try {
-    const deleted = storage.delete('scrap', req.params.id)
+    const deleted = await storage.delete('scrap', req.params.id)
     if (!deleted) {
       return res.status(404).json({ message: 'Scrap item not found' })
     }
